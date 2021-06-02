@@ -11,7 +11,7 @@ class ContactController extends Controller
     public function index(){
         $contacts= Contact::all();
 
-         return view('contact-list',compact('contacts'));
+         return view('index',compact('contacts'));
     }
 
     public function contact(){
@@ -19,6 +19,14 @@ class ContactController extends Controller
     }
 
     public function store(Request $request){
+
+        $data = $request->validate([
+            'firstName' => 'required|min:5|max:10' ,
+            'lastName' => 'required' ,
+            'email' => 'required'
+        ]);
+
+
         $contact = new Contact;
 
         $contact->fName = $request->firstName;
@@ -26,11 +34,11 @@ class ContactController extends Controller
         $contact->email = $request->email;
 
         $contact->save();
-        return redirect()->back();
+        return redirect('/');
 
     }
 
-    public function delete($id){
+    public function destroy($id){
 
         $contact = Contact::find($id);
         $contact->delete();
@@ -40,9 +48,8 @@ class ContactController extends Controller
 
     public function edit($id){
        $contact =Contact::findOrFail($id);
-       return view('contact',compact('contact'));
 
-
+       return view('edit',compact('contact'));
     }
 
 

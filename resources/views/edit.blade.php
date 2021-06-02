@@ -5,40 +5,30 @@
     <div class="col-md-8 col-md-offset-2 m-auto">
         <div class="contact-form">
             <h1>Contact Us</h1>
-            <a class="btn btn-info" href="{{url('/')}}">Show all Contacts</a>
             <p class="hint-text">We'd love to hear from you, please drop us a line if you've any query.</p>
-            <form action="{{url('store')}}" method="post">
+            <form action="{{url('update/'.$contact->id)}}" method="post">
                 @csrf
+                @method('patch')
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="inputFirstName">First Name</label>
-                            <input type="text" class="form-control" name="firstName" id="inputFirstName" >
+                            <input type="text" class="form-control" name="firstName" id="inputFirstName" value="{{$contact->fName}}" required>
                         </div>
-                        @error('firstName')
-                        <p style="color:red">{{$message}}</p>
-                        @enderror
                     </div>
-
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="inputLastName">Last Name</label>
-                            <input type="text" class="form-control" name="lastName" id="inputLastName" >
+                            <input type="text" class="form-control" name="lastName" id="inputLastName" value="{{$contact->lName}}" required>
                         </div>
-                        @error('lastName')
-                        <p style="color:red">{{$message}}</p>
-                        @enderror
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputEmail">Email Address</label>
-                    <input type="email" class="form-control" name="email" id="inputEmail" >
+                    <input type="email" class="form-control" name="email" id="inputEmail" value="{{$contact->email}}" required>
                 </div>
-                @error('email')
-                <p style="color:red">{{$message}}</p>
-                @enderror
 
-                <input type="submit" class="btn btn-primary" value="Add Contact">
+                <input type="submit"  class="btn btn-primary" value="Update" >
             </form>
         </div>
     </div>

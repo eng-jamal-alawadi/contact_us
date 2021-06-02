@@ -4,6 +4,8 @@
     <div class="col-md-8 col-md-offset-2 m-auto">
         <div class="contact-form">
             <h3>Contact List</h1>
+                <a class="btn btn-primary" href="{{url('contact')}}">Add Contact</a>
+
             <table class="table table-striped table-hover">
               <thead>
                 <tr>
@@ -22,12 +24,20 @@
                     <td>{{$contact->fName}}</td>
                     <td>{{$contact->lName}}</td>
                     <td>{{$contact->email}}</td>
-                     <td><a class="btn btn-danger" href="{{'delete/'.$contact-> id}}" >Delete</a></td>
-                     <td><a class="btn btn-primary" href="{{'edit/'.$contact-> id}}"  > Edit</a></td>
+
+                    <td><form action="{{url('destroy/'.$contact->id)}}" method="post">
+                        @csrf
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                    </form></td>
+                    <td><form action="{{url('edit/'.$contact->id)}}" method="post">
+                        @csrf
+                        @method('put')
+                    <button type="submit" class="btn btn-primary">Edit</button>
+                    </form></td>
 
                   </tr>
                   @endforeach
-                  <a class="btn btn-primary" href="contact">Add Contact</a>
+
 
 
 

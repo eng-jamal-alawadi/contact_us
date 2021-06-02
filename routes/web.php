@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[ContactController::class ,'index']);
 Route::get('contact',[ContactController::class, 'contact']);
 Route::post('store', [ContactController::class, 'store']);
-Route::get('delete/{id}',[ContactController::class, 'delete']);
-Route::get('edit/{id}',[ContactController::class, 'edit']);
-Route::post('update/{id}',[ContactController::class, 'update']);
+Route::post('destroy/{id}',[ContactController::class, 'destroy']);
+Route::put('edit/{id}',[ContactController::class, 'edit']);
+Route::patch('update/{id}',[ContactController::class, 'update']);
 
 
