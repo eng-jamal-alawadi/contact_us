@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\ContactController;
 use App\Models\Contact;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContactController;
 
 
 // Route::get('/', function () {
@@ -18,3 +19,7 @@ Route::put('edit/{id}',[ContactController::class, 'edit']);
 Route::patch('update/{id}',[ContactController::class, 'update']);
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

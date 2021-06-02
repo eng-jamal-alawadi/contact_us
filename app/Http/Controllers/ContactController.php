@@ -5,11 +5,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ContactController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
     public function index(){
-        $contacts= Contact::all();
+        $contacts= Contact::where('user_id', Auth::user()->id)->get(); 
 
          return view('index',compact('contacts'));
     }
@@ -32,6 +36,7 @@ class ContactController extends Controller
         $contact->fName = $request->firstName;
         $contact->lName = $request->lastName;
         $contact->email = $request->email;
+        $contact->user_id = Auth::user()->id;
 
         $contact->save();
         return redirect('/');
